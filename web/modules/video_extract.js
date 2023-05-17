@@ -103,23 +103,16 @@ class VideoFrameExtractor {
         wss.onmessage = async (event) => {
             let rcvData = event.data;
 
-            this.rcvBufferArray.push(rcvData)
-            console.log(this.rcvBufferArray)
+            this.rcvBufferArray.push(rcvData);
             
-            if (rcvData == 'end'){
-                
-                // 배열을 정렬
+            if (rcvData == 'end'){  
                 this.rcvBufferArray.sort((a, b) => {
-                    // ':' 앞의 숫자를 추출하여 정수로 변환
                     let indexA = parseInt(a.split(':')[0]);
                     let indexB = parseInt(b.split(':')[0]);
-
-                    // 인덱스를 비교하여 정렬
                     return indexA - indexB;
                 });
                 
                 this.rcvBufferArray = this.rcvBufferArray.map(item => {
-                    // ':' 이후의 부분을 반환
                     return item.split(':')[1];
                 });
                 
@@ -136,13 +129,10 @@ class VideoFrameExtractor {
                 let blob = new Blob([array.buffer], {type: 'text/plain'});
 
                 this.modelURL = URL.createObjectURL(blob);
-    
-                console.log('modelURL : ', this.modelURL)
         
                 this.loadModelFromURL();
 
                 this.rcvBufferArray = [];
-                console.log(this.rcvBufferArray)
             }
             
             // console.log('Received data');
