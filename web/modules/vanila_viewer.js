@@ -1,6 +1,7 @@
 import { VideoFrameExtractor } from './video_extract.js';
 
-const extractor = new VideoFrameExtractor(`video-input`, 'viewerCanvas');
+// const wss = new WebSocket('wss://park-tdl.tsp-xr.com:7777');
+const extractor = new VideoFrameExtractor(`video-input`, 'viewerCanvas', 'park-tdl.tsp-xr.com', '7777');
 extractor.frames;
 
 const viewer = document.getElementById('viewer');

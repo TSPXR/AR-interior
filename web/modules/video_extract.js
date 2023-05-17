@@ -3,16 +3,17 @@ import { OrbitControls } from './three.js/controls/OrbitControls.js';
 import {OBJLoader} from './three.js/loaders/OBJLoader.js';
 
 class VideoFrameExtractor {
-    constructor(videoInputId, canvasId) {
+    constructor(videoInputId, canvasId, socketURL, socketPort) {
         this.videoInput = document.getElementById(videoInputId);
         this.renderCanvasId = document.getElementById(canvasId);
+        this.socketURL = socketURL;
+        this.socketPort = socketPort;
         this.canvas = document.getElementById('canvas');
         this.context = this.canvas.getContext('2d');
         this.frames = [];
         this.rcvBufferArray = [];
         this.modelURL = undefined;
         
-
         this.loader = new OBJLoader();
         this.scene = new THREE.Scene();
         this.camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
@@ -32,9 +33,7 @@ class VideoFrameExtractor {
         pointLight.position.set(50, 50, 50);
         this.scene.add(pointLight);
 
-
         this.init();
-
     }
 
     init() {
@@ -84,12 +83,10 @@ class VideoFrameExtractor {
     }
     
     async sendImages() {
-        // const wss = new WebSocket('ws://127.0.0.1:7777');
-        const wss = new WebSocket('wss://park-tdl.tsp-xr.com:7777');
+        const wss = new WebSocket('wss://' + this.socketURL + ':'+ this.socketPort);
 
         wss.onopen = async () => {
             wss.send('send');
-    
             for (let i = 0; i < this.frames.length; i++) {
                 let blob = this.frames[i];
     
@@ -133,43 +130,16 @@ class VideoFrameExtractor {
                 this.loadModelFromURL();
 
                 this.rcvBufferArray = [];
-            }
-            
-            // console.log('Received data');
-            
-            // console.log(typeof event.data);
-            // console.log(event.data);
-            
-            
-           
+            }   
         }
 
-        // wss.onmessage = async (event) => {
-        //     let rcvData = event.data;
-            
-        //     console.log('Received data');
-            
-        //     console.log(typeof event.data);
-        //     console.log(event.data);
-            
-            
-        //     let binaryData = atob(event.data);
-            
-            
-        //     let len = binaryData.length;
-        //     let array = new Uint8Array(len);
-            
-        //     for (let i = 0; i < len; i++) {
-        //         array[i] = binaryData.charCodeAt(i);
-        //     }
-        //     let blob = new Blob([array.buffer], {type: 'text/plain'});
-
-        //     this.modelURL = URL.createObjectURL(blob);
-  
-        //     console.log('modelURL : ', this.modelURL)
-    
-        //     this.loadModelFromURL();
-        // }
+        wss.onerror = function(error) {
+            console.error('WebSocket connection error', error);
+        };
+          
+        wss.onclose = function(event) {
+            console.log('WebSocket connection closed');
+        };
     }
     
     loadModelFromURL() {
