@@ -3,11 +3,14 @@ import { OrbitControls } from './three.js/controls/OrbitControls.js';
 import {OBJLoader} from './three.js/loaders/OBJLoader.js';
 
 class VideoFrameExtractor {
-    constructor(videoInputId, canvasId, socketURL, socketPort) {
+    constructor(videoInputId, canvasId, buttonId, socketURL, socketPort) {
         this.videoInput = document.getElementById(videoInputId);
         this.renderCanvasId = document.getElementById(canvasId);
+        this.sendButtonId = document.getElementById(buttonId);
         this.socketURL = socketURL;
         this.socketPort = socketPort;
+        console.log(this.socketURL);
+        console.log(this.socketPort);
         this.canvas = document.getElementById('canvas');
         this.context = this.canvas.getContext('2d');
         this.frames = [];
@@ -62,7 +65,8 @@ class VideoFrameExtractor {
     async processVideo(video) {
         const interval = 250;
         let currentTime = 0;
-
+        
+        console.log('프레임 추출 시작');
         while (currentTime < video.duration) {
             video.currentTime = currentTime;
             console.log('capture frames');
@@ -70,6 +74,8 @@ class VideoFrameExtractor {
             await this.captureFrame(video);
             currentTime += interval / 1000;
         }
+        console.log('프레임 추출 종료');
+        this.sendButtonId.disabled = false;
     }
 
     async captureFrame(video) {
@@ -83,8 +89,13 @@ class VideoFrameExtractor {
     }
     
     async sendImages() {
-        const wss = new WebSocket('wss://' + this.socketURL + ':'+ this.socketPort);
+        // 이미지 전송을 눌렀을 때 중복 전송을 방지하기 위한 버튼 비활성화
+        if (this.sendButtonId.disabled == false){
+            this.sendButtonId.disabled = true;
+        }
 
+        const wss = new WebSocket('ws://' + this.socketURL + ':'+ this.socketPort);
+        
         wss.onopen = async () => {
             wss.send('send');
             for (let i = 0; i < this.frames.length; i++) {
@@ -95,6 +106,8 @@ class VideoFrameExtractor {
                 wss.send(base64Data);
             }
             wss.send('end');
+
+            console.log('send all images');
         };
         
         wss.onmessage = async (event) => {
