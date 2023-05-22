@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>360-degree Image Viewer</title>
+    <style>
+        body {
+            margin: 0;
+        }
+        canvas {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <input type="file" id="videoInput1" accept="video/*" />
+    <input type="file" id="videoInput2" accept="video/*" />
+    <input type="file" id="videoInput3" accept="video/*" />
+    <input type="file" id="videoInput4" accept="video/*" />
+    <button id="checkbutton" class="favorite styled" type="button">
+        Test!
+    </button>
+    <canvas id="canvas" style="display:none;"></canvas>
+
+    <div id="viewer">
+        <img alt="360 degree view" id="currentImage">
+    </div>
+    <script type="module" src="./modules/vanilaViewer.js"></script>
+</body>
+
+</html>
