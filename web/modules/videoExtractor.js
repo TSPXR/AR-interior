@@ -63,7 +63,7 @@ class VideoFrameExtractor {
     }
 
     async processVideo(video) {
-        const interval = 250;
+        const interval = 50;
         let currentTime = 0;
         
         console.log('프레임 추출 시작');

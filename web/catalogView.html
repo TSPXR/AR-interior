@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>360-degree Image Viewer</title>
+    <style>
+      body { margin: 0; }
+      canvas { display: block; }
+    </style>
+</head>
+<body>
+
+  <form id="myForm">
+    <input type="radio" name="keyword" value="room">방<br>
+    <input type="radio" name="keyword" value="living room">거실<br>
+    <input type="radio" name="keyword" value="bed room">침실<br>
+    <input type="radio" name="keyword" value="master bedroom">안방<br>
+    <button id='sendButton' class='favorite styled' type='button' disabled>
+      Test!
+    </button>
+  </form>
+
+    <script type='module' src='./modules/catalogViewer.js'></script>
+</body>
+</html>

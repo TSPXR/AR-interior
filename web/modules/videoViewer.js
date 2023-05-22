@@ -1,4 +1,4 @@
-import { VideoFrameExtractor } from './videoExtract.js';
+import { VideoFrameExtractor } from './videoExtractor.js';
 
 const extractor = new VideoFrameExtractor(
     `videoInput`,
