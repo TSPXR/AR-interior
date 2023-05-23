@@ -1,6 +1,4 @@
 let express = require('express');
-// const ejs = require('ejs');
-// let module = require('module');
 let app = express();
 let cors = require('cors');
 
@@ -20,15 +18,14 @@ app.use('/', express.static(__dirname));
 app.use('/styles', express.static(__dirname + '/styles'));
 app.use('/modules', express.static(__dirname + '/modules'));
 app.use('/img', express.static(__dirname + '/img'));
-// app.use('/js', express.static(__dirname + '/js'));
-// app.use('/sample_models', express.static(__dirname + '/sample_models'));
+
 let server_port = 5555;
 let server = require('https').createServer(options, app);
 
-// app.get('/', (req, res) => {
-//     res.render(__dirname + '/productView.html');    // index.ejs을 사용자에게 전달
-//     console.log(__dirname);
-// })
+app.get('/', (req, res) => {
+    res.render(__dirname + '/productView.html');    // index.ejs을 사용자에게 전달
+    console.log(__dirname);
+})
 
 server.listen(server_port, function() {
   console.log( 'Express server listening on port ' + server.address().port );

@@ -4,7 +4,7 @@ const videoNum = 4;
 const videoFrameList = [];
 
 for (let i = 1; i <= videoNum; i++) {
-  const extractor = new VideoFrameExtractor(`videoInput${i}`, 'canvas');
+  const extractor = new VideoFrameExtractor(`videoInput${i}`, 'canvas', 'checkbutton');
   videoFrameList.push(extractor.frames);
 }
 
@@ -36,7 +36,6 @@ function testFunc(){
     
     currentImage.src = URL.createObjectURL(videoFrameList[2][12]);
 
-    console.log(currentImage.src);
     const totalImages = videoFrameList[0].length;
 
     let currentImageIndex = 1;
@@ -56,7 +55,7 @@ function testFunc(){
         const startY = e.clientY || e.touches[0].clientY;
         const initialImageIndex = currentImageIndex;
         const initialCameraIndex = currentCameraIndex;
-
+        
         function handleMove(e) {
             const deltaX = (e.clientX || e.touches[0].clientX) - startX;
             const deltaY = (e.clientY || e.touches[0].clientY) - startY;
@@ -66,6 +65,7 @@ function testFunc(){
             currentImageIndex = ((currentImageIndex - 1) % totalImages + totalImages) % totalImages + 1; // Wrap around index
 
             currentCameraIndex = clamp(Math.round(initialCameraIndex - (deltaY / viewer.clientHeight) * (cameras.length - 1)), 0, cameras.length - 1);
+
             updateImage();
         }
 

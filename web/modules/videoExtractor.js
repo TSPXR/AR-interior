@@ -3,15 +3,14 @@ import { OrbitControls } from './three.js/controls/OrbitControls.js';
 import {OBJLoader} from './three.js/loaders/OBJLoader.js';
 
 class VideoFrameExtractor {
-    constructor(videoInputId, canvasId, buttonId, socketURL, socketPort) {
+    constructor(videoInputId, renderCanvasId, buttonId, socketURL, socketPort) {
         this.videoInput = document.getElementById(videoInputId);
-        this.renderCanvasId = document.getElementById(canvasId);
+        this.renderCanvasId = document.getElementById(renderCanvasId);
         this.sendButtonId = document.getElementById(buttonId);
         this.socketURL = socketURL;
         this.socketPort = socketPort;
-        console.log(this.socketURL);
-        console.log(this.socketPort);
-        this.canvas = document.getElementById('canvas');
+        
+        this.canvas = document.createElement('Canvas');
         this.context = this.canvas.getContext('2d');
         this.frames = [];
         this.rcvBufferArray = [];
