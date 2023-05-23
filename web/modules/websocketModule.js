@@ -33,7 +33,7 @@ class CatalogWebsocket {
             }
         }
 
-        const wss = new WebSocket('ws://' + this.socketURL + ':'+ this.socketPort);
+        const wss = new WebSocket('wss://' + this.socketURL + ':'+ this.socketPort);
         
         wss.onopen = async () => {
             wss.send(this.selectCategoryButton + ':' + this.selectRoomButton);

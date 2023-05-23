@@ -5,7 +5,7 @@ const websocketModule = new CatalogWebsocket(
     'roomName',
     'catalogCanvas',
     'sendButton',
-    '127.0.0.1',
+    'park-tdl.tsp-xr.com',
     '7778');
 
 const videoNullCheckButton = document.getElementById('sendButton');

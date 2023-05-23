@@ -4,7 +4,7 @@ const videoNum = 4;
 const videoFrameList = [];
 
 for (let i = 1; i <= videoNum; i++) {
-  const extractor = new VideoFrameExtractor(`videoInput${i}`);
+  const extractor = new VideoFrameExtractor(`videoInput${i}`, 'canvas');
   videoFrameList.push(extractor.frames);
 }
 

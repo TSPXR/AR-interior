@@ -4,7 +4,7 @@ const extractor = new VideoFrameExtractor(
     `videoInput`,
     'viewerCanvas',
     'sendButton',
-    '127.0.0.1',
+    'park-tdl.tsp-xr.com',
     '7777');
 
 const videoNullCheckButton = document.getElementById('sendButton');

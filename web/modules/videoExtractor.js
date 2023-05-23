@@ -63,7 +63,7 @@ class VideoFrameExtractor {
     }
 
     async processVideo(video) {
-        const interval = 50;
+        const interval = 500;
         let currentTime = 0;
         
         console.log('프레임 추출 시작');
@@ -94,7 +94,7 @@ class VideoFrameExtractor {
             this.sendButtonId.disabled = true;
         }
 
-        const wss = new WebSocket('ws://' + this.socketURL + ':'+ this.socketPort);
+        const wss = new WebSocket('wss://' + this.socketURL + ':'+ this.socketPort);
         
         wss.onopen = async () => {
             wss.send('send');
