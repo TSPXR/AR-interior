@@ -11,16 +11,32 @@
 </head>
 <body>
 
-  <form id="myForm">
-    <input type="radio" name="keyword" value="room">방<br>
-    <input type="radio" name="keyword" value="living room">거실<br>
-    <input type="radio" name="keyword" value="bed room">침실<br>
-    <input type="radio" name="keyword" value="master bedroom">안방<br>
-    <button id='sendButton' class='favorite styled' type='button' disabled>
-      Test!
-    </button>
+  <form id="selectCategory">
+    <input type="radio" name="category" value="bed">bed<br>
+    <input type="radio" name="category" value="sofa">sofa<br>
+    <input type="radio" name="category" value="table">table<br>
+    <input type="radio" name="category" value="chair">chair<br>
   </form>
 
+  <br>
+
+  <form id="selectRoom">
+    <input type="radio" name="roomName" value="room">방<br>
+    <input type="radio" name="roomName" value="living room">거실<br>
+    <input type="radio" name="roomName" value="bed room">침실<br>
+    <input type="radio" name="roomName" value="master bedroom">안방<br>
+  </form>
+
+  <button id='sendButton' class='favorite styled' type='button' disabled>
+    Test!
+  </button>
+
+  <!-- <div style="display: flex; flex-wrap: wrap; justify-content: space-around;"> -->
+    <canvas id="catalogCanvas1" width="512" height="512" style="border:1px solid #d3d3d3;"></canvas>
+    <canvas id="catalogCanvas2" width="512" height="512" style="border:1px solid #d3d3d3;"></canvas>
+    <canvas id="catalogCanvas3" width="512" height="512" style="border:1px solid #d3d3d3;"></canvas>
+    <canvas id="catalogCanvas4" width="512" height="512" style="border:1px solid #d3d3d3;"></canvas>
+  <!-- </div> -->
     <script type='module' src='./modules/catalogViewer.js'></script>
 </body>
 </html>

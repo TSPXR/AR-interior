@@ -1,7 +1,9 @@
 import {CatalogWebsocket} from './websocketModule.js';
 
 const websocketModule = new CatalogWebsocket(
-    'keyword',
+    'category',
+    'roomName',
+    'catalogCanvas',
     'sendButton',
     '127.0.0.1',
     '7778');
